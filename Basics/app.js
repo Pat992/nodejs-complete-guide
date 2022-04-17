@@ -5,7 +5,7 @@ const routes = require('./routes');
 // http.createServer(rqListener);
 
 // Create server with request and response callback
-const server = http.createServer(routes);
+const server = http.createServer(routes.requestHandler);
 
 // Start server-process
 server.listen(3000);
