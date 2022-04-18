@@ -1,7 +1,7 @@
 // @ts-check
 const express = require('express');
 const path = require('path');
-const expressHbs = require('express-handlebars');
+// const expressHbs = require('express-handlebars');
 // Get routes
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
@@ -10,10 +10,11 @@ const app = express();
 
 // Set templating engine with view-engine -> if built-in in express
 // app.set('view-engine', 'pug');
+app.set('view-engine', 'ejs');
 
 // Set template engine if not built-in
-app.engine('hbs', expressHbs.engine({ layoutsDir: 'views/layouts', defaultLayout: 'main-layout.hbs' }));
-app.set('view-engine', 'hbs');
+// app.engine('hbs', expressHbs.engine({ layoutsDir: 'views/layouts', defaultLayout: 'main-layout.hbs' }));
+// app.set('view-engine', 'hbs');
 
 // Set views folder, if not in view-folder
 app.set('views', 'views');
@@ -32,7 +33,8 @@ app.use(shopRoutes);
 app.use((req, res, next) => {
     res
         .status(404)
-        .render('404.hbs', { pageTitle: 'Page not found', defaultLayout: false });
+        .render('404.ejs', { pageTitle: 'Page not found' });
+    // .render('404.hbs', { pageTitle: 'Page not found', defaultLayout: false });
     // .render('404.pug', { pageTitle: 'Page not found' });
 });
 

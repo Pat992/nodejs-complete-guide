@@ -12,7 +12,16 @@ router.get('/', (req, res) => {
 
     // If app uses a view-engine, use res.render
     // res.render('shop.pug', { prods: adminData.products, pageTitle: 'Shop', path: '/' });
-    res.render('shop.hbs', {
+    // res.render('shop.hbs', {
+    //     prods: adminData.products,
+    //     pageTitle: 'Shop',
+    //     path: '/',
+    //     imageSrc: 'https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png',
+    //     hasProducts: adminData.products.length > 0,
+    //     activeShop: true,
+    //     productCSS: true
+    // });
+    res.render('shop.ejs', {
         prods: adminData.products,
         pageTitle: 'Shop',
         path: '/',
