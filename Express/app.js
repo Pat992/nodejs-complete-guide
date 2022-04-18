@@ -1,14 +1,20 @@
 // @ts-check
 const express = require('express');
 const path = require('path');
+const { engine } = require('express-handlebars');
 // Get routes
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 const app = express();
 
-// Set templating engine with view-engine
-app.set('view-engine', 'pug');
+// Set templating engine with view-engine -> if built-in in express
+// app.set('view-engine', 'pug');
+
+// Set template engine if not built-in
+app.engine('hbs', engine());
+app.set('view-engine', 'hbs');
+
 // Set views folder, if not in view-folder
 app.set('views', 'views');
 
