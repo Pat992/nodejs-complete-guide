@@ -26,7 +26,7 @@ app.use(shopRoutes);
 app.use((req, res, next) => {
     res
         .status(404)
-        .render('404.pug');
+        .render('404.pug', { pageTitle: 'Page not found' });
 });
 
 app.listen(port, () => {
