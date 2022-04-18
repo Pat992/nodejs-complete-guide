@@ -1,7 +1,7 @@
 // @ts-check
 const express = require('express');
 const path = require('path');
-const { engine } = require('express-handlebars');
+const expressHbs = require('express-handlebars');
 // Get routes
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
@@ -12,7 +12,7 @@ const app = express();
 // app.set('view-engine', 'pug');
 
 // Set template engine if not built-in
-app.engine('hbs', engine());
+app.engine('hbs', expressHbs.engine());
 app.set('view-engine', 'hbs');
 
 // Set views folder, if not in view-folder
@@ -32,7 +32,8 @@ app.use(shopRoutes);
 app.use((req, res, next) => {
     res
         .status(404)
-        .render('404.pug', { pageTitle: 'Page not found' });
+        .render('404.hbs', { pageTitle: 'Page not found', layout: false });
+    // .render('404.pug', { pageTitle: 'Page not found' });
 });
 
 app.listen(port, () => {

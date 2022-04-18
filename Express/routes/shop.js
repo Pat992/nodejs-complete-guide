@@ -11,7 +11,8 @@ router.get('/', (req, res) => {
     // res.sendFile(path.join(rootDir, 'views', 'shop.html'));
 
     // If app uses a view-engine, use res.render
-    res.render('shop.pug', { prods: adminData.products, pageTitle: 'Shop', path: '/' });
+    // res.render('shop.pug', { prods: adminData.products, pageTitle: 'Shop', path: '/' });
+    res.render('shop.hbs', { prods: adminData.products, pageTitle: 'Shop', path: '/', layout: false });
 });
 
 module.exports = router;
