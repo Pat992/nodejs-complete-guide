@@ -1,15 +1,15 @@
-// Pretty cool that comment
 // @ts-check
+const express = require('express');
 
-const http = require('http');
+const app = express();
+const port = process.env.PORT || 3000;
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-// const rqListener = (req, res) => { }
-// http.createServer(rqListener);
-
-// Create server with request and response callback
-const server = http.createServer((req, res) => {
-
+app.use(express.json());
+app.get('/', (req, res) => {
+    res.end('Working');
 });
 
-// Start server-process
-server.listen(3000);
+app.listen(port, () => {
+    console.log(`Server started on port port`);
+});
