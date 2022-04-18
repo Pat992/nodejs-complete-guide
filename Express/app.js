@@ -13,7 +13,7 @@ app.use(express.urlencoded());
 // Serve CSS with static
 app.use(express.static(path.join(__dirname, 'public')));
 // use Routes
-app.use('/admin', adminRoutes);
+app.use('/admin', adminRoutes.router);
 app.use(shopRoutes);
 
 // 404 router
