@@ -6,6 +6,12 @@ const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 const app = express();
+
+// Set templating engine with view-engine
+app.set('view-engine', 'pug');
+// Set views folder, if not in view-folder
+app.set('views', 'views');
+
 const port = process.env.PORT || 3000;
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
