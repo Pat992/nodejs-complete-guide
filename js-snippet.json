@@ -19,5 +19,21 @@
             "});"
         ],
         "description": "Creating Express API"
+    },
+    "Express Routes": {
+        "prefix": "expressRoute",
+        "body": [
+            "// @ts-check",
+            "const express = require('express');",
+            "",
+            "const router = express.Router();",
+            "",
+            "router.get('/', (req, res) => {",
+            "\tres.end('Working');",
+            "});",
+            "",
+            "module.exports = router;"
+        ],
+        "description": "Creating Express API"
     }
 }
