@@ -33,7 +33,7 @@ app.use(shopRoutes);
 app.use((req, res, next) => {
     res
         .status(404)
-        .render('404.ejs', { pageTitle: 'Page not found' });
+        .render('404.ejs', { pageTitle: 'Page not found', path: '/not-found' });
     // .render('404.hbs', { pageTitle: 'Page not found', defaultLayout: false });
     // .render('404.pug', { pageTitle: 'Page not found' });
 });
