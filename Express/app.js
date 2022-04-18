@@ -10,8 +10,8 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 app.use(express.urlencoded());
 // use Routes
-app.use(shopRoutes);
 app.use(adminRoutes);
+app.use(shopRoutes);
 
 app.listen(port, () => {
     console.log(`Server started on port port`);
