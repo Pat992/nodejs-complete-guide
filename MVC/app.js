@@ -5,6 +5,7 @@ const path = require('path');
 // Get routes
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+const { get404 } = require('./controllers/404');
 
 const app = express();
 
@@ -25,11 +26,7 @@ app.use('/admin', adminRoutes.router);
 app.use(shopRoutes);
 
 // 404 router
-app.use((req, res, next) => {
-    res
-        .status(404)
-        .render('404.ejs', { pageTitle: 'Page not found', path: '/not-found' });
-});
+app.use(get404);
 
 app.listen(port, () => {
     console.log(`Server started on port port`);
