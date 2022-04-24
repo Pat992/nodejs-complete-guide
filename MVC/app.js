@@ -19,8 +19,10 @@ const port = process.env.PORT || 3000;
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 app.use(express.urlencoded());
-// Serve CSS staticly
+
+// Serve CSS staticly 
 app.use(express.static(path.join(__dirname, 'public')));
+
 // use Routes
 app.use('/admin', adminRoutes.router);
 app.use(shopRoutes);

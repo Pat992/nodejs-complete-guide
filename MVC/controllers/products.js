@@ -1,10 +1,9 @@
 // @ts-check
-
-const products = [];
+const Product = require('../models/product');
 
 const getProducts = (req, res) => {
     res.render('shop.ejs', {
-        prods: products,
+        prods: Product.fetchAll(),
         pageTitle: 'Shop',
         path: '/',
         imageSrc: 'https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png',
@@ -19,7 +18,8 @@ const getProduct = (req, res) => {
 }
 
 const postProduct = (req, res) => {
-    products.push({ 'title': req.body.title });
+    const product = new Product(req.body.title);
+    product.save();
     res.redirect('/');
 }
 
