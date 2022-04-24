@@ -1,9 +1,15 @@
 // @ts-check
 const express = require('express');
-const { getProducts } = require('../controllers/products');
+const { getProducts, getChart, getCheckout } = require('../controllers/products');
 
 const router = express.Router();
 
 router.get('/', getProducts);
+
+router.get('/products', getProducts);
+
+router.get('/cart', getChart);
+
+router.get('/checkout', getCheckout);
 
 module.exports = router;

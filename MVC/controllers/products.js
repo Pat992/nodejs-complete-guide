@@ -19,10 +19,24 @@ const getProduct = (req, res) => {
     });
 }
 
+const getChart = (req, res) => {
+    res.render('shop/cart.ejs', {
+        pageTitle: 'Cart',
+        path: '/cart',
+    });
+}
+
+const getCheckout = (req, res) => {
+    res.render('shop/cart.ejs', {
+        pageTitle: 'Checkout',
+        path: '/checkout',
+    });
+}
+
 const postProduct = (req, res) => {
     const product = new Product(req.body.title);
     product.save();
     res.redirect('/');
 }
 
-module.exports = { getProduct, getProducts, postProduct }
+module.exports = { getProduct, getProducts, postProduct, getChart, getCheckout }
