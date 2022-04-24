@@ -1,6 +1,8 @@
 // @ts-check
+const fs = require('fs');
+const path = require('path');
 
-const products = [];
+const rootPath = require('../util/path');
 
 module.exports = class Product {
     constructor(title) {
@@ -8,10 +10,25 @@ module.exports = class Product {
     }
 
     save() {
-        products.push(this);
+        this.p = path.join(rootPath, 'data', 'products.json');
+        fs.readFile(this.p, (err, data) => {
+            let products = [];
+            if (!err) {
+                products = JSON.parse(data.toString());
+            }
+            products.push(this);
+
+            fs.writeFile(this.p, JSON.stringify(products), () => { });
+        });
     }
 
-    static fetchAll() {
-        return products;
+    static fetchAll(callback) {
+        this.p = path.join(rootPath, 'data', 'products.json');
+        fs.readFile(this.p, (err, data) => {
+            if (err) {
+                callback([]);
+            }
+            callback(JSON.parse(data.toString()));
+        });
     }
 }
