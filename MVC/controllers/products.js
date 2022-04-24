@@ -3,7 +3,7 @@ const Product = require('../models/product');
 
 const getProducts = (req, res) => {
     Product.fetchAll(products => {
-        res.render('shop.ejs', {
+        res.render('shop/product-list.ejs', {
             prods: products,
             pageTitle: 'Shop',
             path: '/',
@@ -13,7 +13,7 @@ const getProducts = (req, res) => {
 }
 
 const getProduct = (req, res) => {
-    res.render('add-product.ejs', {
+    res.render('admin/add-product.ejs', {
         pageTitle: 'Add Product',
         path: '/admin/add-product',
     });

@@ -1,9 +1,9 @@
-<%- include('partials/head.ejs') %>
+<%- include('../partials/head.ejs') %>
     <link rel="stylesheet" href="/css/product.css">
     </head>
 
     <body>
-        <%- include('partials/navigation.ejs') %>
+        <%- include('../partials/navigation.ejs') %>
             <main>
                 <% if(prods.length> 0) { %>
                     <% for(let product of prods) { %>
@@ -34,4 +34,4 @@
                             <h2>No products</h2>
                             <% } %>
             </main>
-            <%- include('partials/end.ejs') %>
+            <%- include('../partials/end.ejs') %>
