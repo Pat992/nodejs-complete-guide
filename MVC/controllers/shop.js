@@ -29,10 +29,17 @@ const getChart = (req, res) => {
 }
 
 const getCheckout = (req, res) => {
-    res.render('shop/cart.ejs', {
+    res.render('shop/checkout.ejs', {
         pageTitle: 'Checkout',
         path: '/checkout',
     });
 }
 
-module.exports = { getProducts, getChart, getCheckout, getIndex }
+const getOrders = (req, res) => {
+    res.render('shop/orders.ejs', {
+        pageTitle: 'Your Orders',
+        path: '/orders',
+    });
+}
+
+module.exports = { getProducts, getChart, getCheckout, getIndex, getOrders }
