@@ -1,10 +1,10 @@
 // @ts-check
 const express = require('express');
-const { getProducts, getChart, getCheckout } = require('../controllers/shop');
+const { getProducts, getChart, getCheckout, getIndex } = require('../controllers/shop');
 
 const router = express.Router();
 
-router.get('/', getProducts);
+router.get('/', getIndex);
 
 router.get('/products', getProducts);
 

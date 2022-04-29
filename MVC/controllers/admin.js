@@ -14,4 +14,15 @@ const getProduct = (req, res) => {
     });
 }
 
-module.exports = { getProduct, postProduct }
+const getProducts = (req, res) => {
+    Product.fetchAll(products => {
+        res.render('admin/products.ejs', {
+            prods: products,
+            pageTitle: 'Products',
+            path: '/admin/products',
+            imageSrc: 'https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png',
+        });
+    });
+}
+
+module.exports = { getProduct, postProduct, getProducts }

@@ -1,12 +1,23 @@
 // @ts-check
 const Product = require('../models/product');
 
+const getIndex = (req, res) => {
+    Product.fetchAll(products => {
+        res.render('shop/index.ejs', {
+            prods: products,
+            pageTitle: 'Shop',
+            path: '/',
+            imageSrc: 'https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png',
+        });
+    });
+}
+
 const getProducts = (req, res) => {
     Product.fetchAll(products => {
         res.render('shop/product-list.ejs', {
             prods: products,
-            pageTitle: 'Shop',
-            path: '/',
+            pageTitle: 'Products',
+            path: '/products',
             imageSrc: 'https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png',
         });
     });
@@ -26,4 +37,4 @@ const getCheckout = (req, res) => {
     });
 }
 
-module.exports = { getProducts, getChart, getCheckout }
+module.exports = { getProducts, getChart, getCheckout, getIndex }
