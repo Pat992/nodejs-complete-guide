@@ -7,7 +7,6 @@ const getIndex = (req, res) => {
             prods: products,
             pageTitle: 'Shop',
             path: '/',
-            imageSrc: 'https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png',
         });
     });
 }
@@ -18,7 +17,6 @@ const getProducts = (req, res) => {
             prods: products,
             pageTitle: 'Products',
             path: '/products',
-            imageSrc: 'https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png',
         });
     });
 }

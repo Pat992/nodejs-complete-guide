@@ -2,7 +2,12 @@
 const Product = require('../models/product');
 
 const postProduct = (req, res) => {
-    const product = new Product(req.body.title);
+    const product = new Product(
+        req.body.title,
+        req.body.imageUrl,
+        req.body.description,
+        req.body.price
+    );
     product.save();
     res.redirect('/');
 }
@@ -20,7 +25,6 @@ const getProducts = (req, res) => {
             prods: products,
             pageTitle: 'Products',
             path: '/admin/products',
-            imageSrc: 'https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png',
         });
     });
 }
