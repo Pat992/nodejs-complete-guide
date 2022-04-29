@@ -12,13 +12,6 @@ const getProducts = (req, res) => {
     });
 }
 
-const getProduct = (req, res) => {
-    res.render('admin/add-product.ejs', {
-        pageTitle: 'Add Product',
-        path: '/admin/add-product',
-    });
-}
-
 const getChart = (req, res) => {
     res.render('shop/cart.ejs', {
         pageTitle: 'Cart',
@@ -33,10 +26,4 @@ const getCheckout = (req, res) => {
     });
 }
 
-const postProduct = (req, res) => {
-    const product = new Product(req.body.title);
-    product.save();
-    res.redirect('/');
-}
-
-module.exports = { getProduct, getProducts, postProduct, getChart, getCheckout }
+module.exports = { getProducts, getChart, getCheckout }
