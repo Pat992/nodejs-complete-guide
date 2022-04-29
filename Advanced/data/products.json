@@ -1,0 +1,14 @@
+[
+    {
+        "title": "A standard book",
+        "imageUrl": "https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png",
+        "description": "Boring...",
+        "price": "10.99"
+    },
+    {
+        "title": "Beach",
+        "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.d-ZzZ7JwBoTqyjWGMAG9mAHaFj%26pid%3DApi&f=1",
+        "description": "This is a beach, not a book",
+        "price": "199.99"
+    }
+]
