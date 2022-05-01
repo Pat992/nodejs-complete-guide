@@ -44,10 +44,12 @@ const getOrders = (req, res) => {
 
 const getProductDetails = (req, res) => {
     const prodId = req.params.prodId;
-    console.log(prodId);
-    res.render('shop/product-details.ejs', {
-        pageTitle: 'Bookname',
-        path: '/products',
+    Product.fetch(prodId, product => {
+        console.log(product);
+        res.render('shop/product-details.ejs', {
+            pageTitle: product.title,
+            path: '/products',
+        });
     });
 };
 
