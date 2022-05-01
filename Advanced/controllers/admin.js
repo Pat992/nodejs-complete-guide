@@ -3,6 +3,7 @@ const Product = require('../models/product');
 
 const postProduct = (req, res) => {
     const product = new Product(
+        null,
         req.body.title,
         req.body.imageUrl,
         req.body.description,
@@ -50,4 +51,16 @@ const getProducts = (req, res) => {
     });
 }
 
-module.exports = { getProduct, postProduct, getProducts, getEditProduct }
+const postEditProduct = ((req, res) => {
+    const product = new Product(
+        req.body.prodId,
+        req.body.title,
+        req.body.imageUrl,
+        req.body.description,
+        req.body.price
+    );
+    product.save();
+    res.redirect('/');
+});
+
+module.exports = { getProduct, postProduct, getProducts, getEditProduct, postEditProduct }

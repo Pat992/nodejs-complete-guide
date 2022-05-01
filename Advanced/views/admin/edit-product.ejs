@@ -31,6 +31,8 @@
                     <button class="btn" type="submit">
                         <% if (editing) { %>Update Product<% }else{ %>Add Product<% } %>
                     </button>
+                    <% if (editing) { %><input id="prodId" name="prodId" type="hidden" value="<%= product.id %>" />
+                        <% }%>
                 </form>
             </main>
             <%- include('../partials/end.ejs') %>
