@@ -40,6 +40,15 @@ const getOrders = (req, res) => {
         pageTitle: 'Your Orders',
         path: '/orders',
     });
-}
+};
 
-module.exports = { getProducts, getChart, getCheckout, getIndex, getOrders }
+const getProductDetails = (req, res) => {
+    const prodId = req.params.prodId;
+    console.log(prodId);
+    res.render('shop/product-details.ejs', {
+        pageTitle: 'Bookname',
+        path: '/products',
+    });
+};
+
+module.exports = { getProducts, getChart, getCheckout, getIndex, getOrders, getProductDetails }
