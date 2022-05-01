@@ -6,8 +6,13 @@ const path = require('path');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const { get404 } = require('./controllers/404');
+const db = require('./util/database');
 
 const app = express();
+
+db.execute('SELECT * FROM products').then(res => {
+    console.log(res[0]);
+}).catch(e => { console.log(e); });
 
 // Set templating engine with view-engine -> if built-in in express
 app.set('view-engine', 'ejs');
