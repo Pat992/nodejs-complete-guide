@@ -4,4 +4,16 @@
 
     <body>
         <%- include('../partials/navigation.ejs') %>
+            <main>
+                <% if (products.length> 0) { %>
+                    <ul>
+                        <% products.forEach(prodDt=> {%><li>
+                                <%= prodDt.prodData.title %> (<%= prodDt.quantity %>)
+                            </li>
+                            <% }); %>
+                    </ul>
+                    <% } else { %>
+                        <h2>No products in Cart</h2>
+                        <% } %>
+            </main>
             <%- include('../partials/end.ejs') %>
