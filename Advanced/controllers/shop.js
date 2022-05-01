@@ -49,6 +49,11 @@ const postCart = (req, res) => {
     res.redirect('/cart');
 };
 
+const deleteCart = (req, res) => {
+    Cart.removeProduct(req.body.prodId, req.body.prodPrice);
+    res.redirect('/cart');
+};
+
 const getCheckout = (req, res) => {
     res.render('shop/checkout.ejs', {
         pageTitle: 'Checkout',
@@ -74,4 +79,4 @@ const getProductDetails = (req, res) => {
     });
 };
 
-module.exports = { getProducts, getCart, getCheckout, getIndex, getOrders, getProductDetails, postCart }
+module.exports = { getProducts, getCart, getCheckout, getIndex, getOrders, getProductDetails, postCart, deleteCart }
