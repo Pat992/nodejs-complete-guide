@@ -3,23 +3,23 @@ const Product = require('../models/product');
 const Cart = require('../models/cart');
 
 const getIndex = (req, res) => {
-    Product.fetchAll(products => {
+    Product.fetchAll().then(([rows, fieldData]) => {
         res.render('shop/index.ejs', {
-            prods: products,
+            prods: rows,
             pageTitle: 'Shop',
             path: '/',
         });
-    });
+    }).catch(e => console.log(e));
 }
 
 const getProducts = (req, res) => {
-    Product.fetchAll(products => {
+    Product.fetchAll().then(([rows, fieldData]) => {
         res.render('shop/product-list.ejs', {
-            prods: products,
+            prods: rows,
             pageTitle: 'Products',
             path: '/products',
         });
-    });
+    }).catch(e => console.log(e));
 }
 
 const getCart = (req, res) => {

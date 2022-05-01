@@ -9,8 +9,9 @@ const postProduct = (req, res) => {
         req.body.description,
         req.body.price
     );
-    product.save();
-    res.redirect('/');
+    product.save().then(([row, fieldData]) => {
+        res.redirect('/');
+    }).catch(e => console.log(e));
 }
 
 const getProduct = (req, res) => {
@@ -28,27 +29,28 @@ const getEditProduct = (req, res) => {
     }
 
     const prodId = req.params.prodId;
-    Product.fetch(prodId, (prod) => {
-        if (!prod) {
+    Product.fetch(prodId).then(([row, fieldData]) => {
+        if (!row) {
             return res.redirect('/admin/add-product');
         }
+
         res.render('admin/edit-product.ejs', {
             pageTitle: 'Edit Product',
             path: '/admin/edit-product',
             editing: editing,
-            product: prod
+            product: row[0]
         });
-    });
+    }).catch(e => console.log(e));
 }
 
 const getProducts = (req, res) => {
-    Product.fetchAll(products => {
+    Product.fetchAll().then(([rows, fieldData]) => {
         res.render('admin/products.ejs', {
-            prods: products,
+            prods: rows,
             pageTitle: 'Products',
             path: '/admin/products',
         });
-    });
+    }).catch(e => console.log(e));
 }
 
 const postEditProduct = ((req, res) => {
