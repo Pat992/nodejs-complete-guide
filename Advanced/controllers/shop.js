@@ -1,5 +1,6 @@
 // @ts-check
 const Product = require('../models/product');
+const Cart = require('../models/cart');
 
 const getIndex = (req, res) => {
     Product.fetchAll(products => {
@@ -30,7 +31,9 @@ const getCart = (req, res) => {
 
 const postCart = (req, res) => {
     const prodId = req.body.productId;
-    console.log(prodId);
+    Product.fetch(prodId, (product) => {
+        Cart.addProduct(product.id, product.price);
+    });
     res.redirect('/cart');
 };
 
