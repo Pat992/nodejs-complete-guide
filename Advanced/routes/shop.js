@@ -1,6 +1,6 @@
 // @ts-check
 const express = require('express');
-const { getProducts, getChart, getCheckout, getIndex, getOrders, getProductDetails } = require('../controllers/shop');
+const { getProducts, getCart, getCheckout, getIndex, getOrders, getProductDetails, postCart } = require('../controllers/shop');
 
 const router = express.Router();
 
@@ -10,7 +10,9 @@ router.get('/products', getProducts);
 
 router.get('/products/:prodId', getProductDetails);
 
-router.get('/cart', getChart);
+router.post('/cart', postCart);
+
+router.get('/cart', getCart);
 
 router.get('/orders', getOrders);
 
