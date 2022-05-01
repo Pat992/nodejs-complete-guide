@@ -45,10 +45,10 @@ const getOrders = (req, res) => {
 const getProductDetails = (req, res) => {
     const prodId = req.params.prodId;
     Product.fetch(prodId, product => {
-        console.log(product);
         res.render('shop/product-details.ejs', {
             pageTitle: product.title,
             path: '/products',
+            product: product
         });
     });
 };
