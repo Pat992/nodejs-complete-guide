@@ -38,6 +38,17 @@ module.exports = class Product {
         });
     }
 
+    static delete(id) {
+        getProductsFromFile((products) => {
+            // const deletingProdIndex = products.findIndex(prod => prod.id === id);
+            // const updatedProds = [...products];
+            // updatedProds.splice(deletingProdIndex, 1);
+            const updatedProds = products.filter(prod => prod.id !== id);
+            fs.writeFile(p, JSON.stringify(updatedProds), () => { });
+        });
+
+    }
+
     static fetchAll(callback) {
         getProductsFromFile(callback);
     }
