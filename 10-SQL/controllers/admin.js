@@ -39,18 +39,32 @@ const getEditProduct = (req, res) => {
 
     const prodId = req.params.prodId;
 
-    Product.findByPk(prodId).then(prod => {
-        if (!prod) {
-            return res.redirect('/admin/add-product');
-        }
+    // Only get product if the user created it
+    req.user.getProducts({ where: { id: prodId } })
+        .then(prods => {
+            if (!prods) {
+                return res.redirect('/admin/add-product');
+            }
+            res.render('admin/edit-product.ejs', {
+                pageTitle: 'Edit Product',
+                path: '/admin/edit-product',
+                editing: editing,
+                product: prods[0]
+            });
+        }).catch(err => console.log(err));
 
-        res.render('admin/edit-product.ejs', {
-            pageTitle: 'Edit Product',
-            path: '/admin/edit-product',
-            editing: editing,
-            product: prod
-        });
-    }).catch(err => console.log(err));
+    // Product.findByPk(prodId).then(prod => {
+    //     if (!prod) {
+    //         return res.redirect('/admin/add-product');
+    //     }
+
+    //     res.render('admin/edit-product.ejs', {
+    //         pageTitle: 'Edit Product',
+    //         path: '/admin/edit-product',
+    //         editing: editing,
+    //         product: prod
+    //     });
+    // }).catch(err => console.log(err));
 }
 
 const getProducts = (req, res) => {

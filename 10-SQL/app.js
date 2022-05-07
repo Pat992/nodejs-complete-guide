@@ -9,6 +9,8 @@ const { get404 } = require('./controllers/404');
 const sequelize = require('./util/database');
 const Product = require('./models/product');
 const User = require('./models/user');
+const Cart = require('./models/cart');
+const CartItem = require('./models/cart-item');
 
 const app = express();
 
@@ -51,6 +53,17 @@ Product.belongsTo(User, {
 });
 // Technically not necessary, but for readability
 User.hasMany(Product);
+
+Cart.belongsTo(User, {
+    constraints: true,
+    onDelete: 'CASCADE'
+})
+User.hasOne(Cart);
+
+// Many 2 many uses a through-table
+Cart.belongsToMany(Product, { through: CartItem });
+Product.belongsToMany(Cart, { through: CartItem });
+
 
 // Add tables to DB automatically -> dont use force on production, will drop tables if necessary
 sequelize.sync({ force: false })
