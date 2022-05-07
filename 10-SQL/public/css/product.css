@@ -9,13 +9,9 @@
     width: 20rem;
     max-width: 95%;
     margin: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .product__title {
-    flex-grow: 1;
     font-size: 1.2rem;
     text-align: center;
 }

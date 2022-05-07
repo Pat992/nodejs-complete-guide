@@ -1,6 +1,5 @@
 // @ts-check
 const Product = require('../models/product');
-const Cart = require('../models/cart');
 
 const getIndex = (req, res) => {
     Product.findAll().then(prods => {
@@ -131,4 +130,19 @@ const getProductDetails = (req, res) => {
     // Product.findAll({ where: { id: prodId } }).then(products => { ...products[0] })
 };
 
-module.exports = { getProducts, getCart, getCheckout, getIndex, getOrders, getProductDetails, postCart, deleteCart }
+const postOrder = (req, res, next) => {
+    req.user.getCart()
+        .then(cart => cart.getProducts())
+        .then(prods => {
+            req.user.createOrder()
+                .then(order => order.addProducts(prods.map(prod => {
+                    prod.order_item = { quantity: prod['cart-item'].quantity }
+                    return prod;
+                })))
+                .then(_ => res.redirect('/orders'))
+                .catch(err => console.log(err))
+        })
+        .catch(err => console.log(err))
+};
+
+module.exports = { getProducts, getCart, getCheckout, getIndex, getOrders, getProductDetails, postCart, deleteCart, postOrder }

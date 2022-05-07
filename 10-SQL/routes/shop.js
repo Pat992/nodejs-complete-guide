@@ -1,6 +1,16 @@
 // @ts-check
 const express = require('express');
-const { getProducts, getCart, getCheckout, getIndex, getOrders, getProductDetails, postCart, deleteCart } = require('../controllers/shop');
+const {
+    getProducts,
+    getCart,
+    getCheckout,
+    getIndex,
+    getOrders,
+    getProductDetails,
+    postCart,
+    deleteCart,
+    postOrder
+} = require('../controllers/shop');
 
 const router = express.Router();
 
@@ -19,5 +29,7 @@ router.post('/cart-delete-item', deleteCart);
 router.get('/orders', getOrders);
 
 router.get('/checkout', getCheckout);
+
+router.post('/create-order', postOrder);
 
 module.exports = router;
