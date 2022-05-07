@@ -1,5 +1,4 @@
 // @ts-check
-const { ObjectId } = require('mongodb');
 const Product = require('../models/product');
 
 const postProduct = (req, res) => {
@@ -12,16 +11,16 @@ const postProduct = (req, res) => {
 
     prod.save()
         .then(_ => {
-            res.render('admin/edit-product.ejs', {
-                pageTitle: 'Add Product',
-                path: '/admin/add-product',
-                editing: false
-            });
+            res.redirect('/products');
         });
 }
 
 const getProduct = (req, res) => {
-
+    res.render('admin/edit-product.ejs', {
+        pageTitle: 'Add Product',
+        path: '/admin/add-product',
+        editing: false
+    });
 }
 
 const getEditProduct = (req, res) => {
@@ -62,7 +61,7 @@ const postEditProduct = ((req, res) => {
         req.body.price,
         req.body.description,
         req.body.imageUrl,
-        new ObjectId(req.body.prodId)
+        req.body.prodId
     );
 
     prod.save()
@@ -71,11 +70,8 @@ const postEditProduct = ((req, res) => {
 });
 
 const deleteProduct = (req, res) => {
-    Product.findByPk(req.body.prodId)
-        .then(prod => {
-            return prod.destroy()
-        })
-        .then(result => res.redirect('/admin/products'))
+    Product.delete(req.body.prodId)
+        .then(_ => res.redirect('/admin/products'))
         .catch(err => console.log(err));
 };
 

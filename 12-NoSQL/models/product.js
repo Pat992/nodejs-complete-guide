@@ -9,7 +9,7 @@ class Product {
         this.price = price;
         this.description = description;
         this.imageUrl = imageUrl;
-        this._id = id;
+        this._id ? ObjectId(id) : undefined;
     };
 
     save() {
@@ -40,6 +40,14 @@ class Product {
         return db.collection('products')
             .find({ _id: ObjectId(prodId) })
             .next()
+            .then(product => product)
+            .catch(e => console.log(e));
+    };
+
+    static delete(prodId) {
+        const db = getDb();
+        return db.collection('products')
+            .deleteOne({ _id: ObjectId(prodId) })
             .then(product => product)
             .catch(e => console.log(e));
     };
