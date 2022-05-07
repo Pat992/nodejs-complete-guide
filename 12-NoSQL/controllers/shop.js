@@ -117,7 +117,7 @@ const getOrders = (req, res, next) => {
 const getProductDetails = (req, res) => {
     const prodId = req.params.prodId;
 
-    Product.findByPk(prodId).then(prod => {
+    Product.fetch(prodId).then(prod => {
         res.render('shop/product-details.ejs', {
             // @ts-ignore
             pageTitle: prod.title,
