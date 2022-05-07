@@ -3,10 +3,10 @@ const express = require('express');
 const path = require('path');
 // const expressHbs = require('express-handlebars');
 // Get routes
-// const adminRoutes = require('./routes/admin');
+const adminRoutes = require('./routes/admin');
 // const shopRoutes = require('./routes/shop');
 const { get404 } = require('./controllers/404');
-const mongoConnect = require('./util/database');
+const { mongoConnect } = require('./util/database');
 
 const app = express();
 
@@ -36,14 +36,13 @@ app.use((req, res, next) => {
 });
 
 // use Routes
-// app.use('/admin', adminRoutes.router);
+app.use('/admin', adminRoutes.router);
 // app.use(shopRoutes);
 
 // 404 router
 app.use(get404);
 
-mongoConnect((client) => {
-    console.log(client);
+mongoConnect(() => {
     app.listen(port, () => {
         console.log(`Server started on port port`);
     });
