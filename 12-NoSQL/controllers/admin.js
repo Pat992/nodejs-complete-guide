@@ -2,33 +2,25 @@
 const Product = require('../models/product');
 
 const postProduct = (req, res) => {
-    req.user.createProduct({
-        title: req.body.title,
-        description: req.body.description,
-        imageUrl: req.body.imageUrl,
-        price: req.body.price,
-    })
-        .then(result => res.redirect('/admin/products'))
-        .catch(err => console.log(err));
+    const prod = new Product(
+        req.body.title,
+        req.body.price,
+        req.body.description,
+        req.body.imageUrl
+    );
 
-    // userId can also be set explicit, but nice with the aboove user.create....()
-    // Product.create({
-    //     title: req.body.title,
-    //     description: req.body.description,
-    //     imageUrl: req.body.imageUrl,
-    //     price: req.body.price,
-    //     userId: req.user.id
-    // })
-    //     .then(result => res.redirect('/admin/products'))
-    //     .catch(err => console.log(err));
+    prod.save()
+        .then(_ => {
+            res.render('admin/edit-product.ejs', {
+                pageTitle: 'Add Product',
+                path: '/admin/add-product',
+                editing: false
+            });
+        });
 }
 
 const getProduct = (req, res) => {
-    res.render('admin/edit-product.ejs', {
-        pageTitle: 'Add Product',
-        path: '/admin/add-product',
-        editing: false
-    });
+
 }
 
 const getEditProduct = (req, res) => {
@@ -52,19 +44,6 @@ const getEditProduct = (req, res) => {
                 product: prods[0]
             });
         }).catch(err => console.log(err));
-
-    // Product.findByPk(prodId).then(prod => {
-    //     if (!prod) {
-    //         return res.redirect('/admin/add-product');
-    //     }
-
-    //     res.render('admin/edit-product.ejs', {
-    //         pageTitle: 'Edit Product',
-    //         path: '/admin/edit-product',
-    //         editing: editing,
-    //         product: prod
-    //     });
-    // }).catch(err => console.log(err));
 }
 
 const getProducts = (req, res) => {

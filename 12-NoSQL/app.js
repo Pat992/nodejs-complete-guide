@@ -25,15 +25,15 @@ app.use(express.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Do everything with the only existing user
-app.use((req, res, next) => {
-    // User.findByPk(1)
-    //     .then(user => {
-    //         // @ts-ignore
-    //         req.user = user;
-    //         next();
-    //     })
-    //     .catch(err => console.log(err));
-});
+// app.use((req, res, next) => {
+//     User.findByPk(1)
+//         .then(user => {
+//             // @ts-ignore
+//             req.user = user;
+//             next();
+//         })
+//         .catch(err => console.log(err));
+// });
 
 // use Routes
 app.use('/admin', adminRoutes.router);
@@ -44,6 +44,6 @@ app.use(get404);
 
 mongoConnect(() => {
     app.listen(port, () => {
-        console.log(`Server started on port port`);
+        console.log(`Server started on port port: ${port}`);
     });
 });

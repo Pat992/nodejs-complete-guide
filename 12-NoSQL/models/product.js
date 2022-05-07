@@ -1,5 +1,5 @@
 // @ts-check
-const _db = require('../util/database').getDb;
+const getDb = require('../util/database').getDb;
 
 class Product {
     constructor(title, price, description, imageUrl) {
@@ -8,7 +8,13 @@ class Product {
         this.description = description;
         this.imageUrl = imageUrl;
     };
-    save() { };
+    save() {
+        const db = getDb();
+        return db.collection('products')
+            .insertOne(this)
+            .then(res => console.log(res))
+            .catch(e => console.log(e));
+    };
 };
 
 module.exports = Product;
