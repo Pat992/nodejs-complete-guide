@@ -75,13 +75,15 @@ const getOrders = (req, res) => {
 
 const getProductDetails = (req, res) => {
     const prodId = req.params.prodId;
-    Product.fetch(prodId, product => {
+
+    Product.findByPk(prodId).then(prod => {
         res.render('shop/product-details.ejs', {
-            pageTitle: product.title,
+            // @ts-ignore
+            pageTitle: prod.title,
             path: '/products',
-            product: product
+            product: prod
         });
-    });
+    }).catch(err => console.log(err));
 };
 
 module.exports = { getProducts, getCart, getCheckout, getIndex, getOrders, getProductDetails, postCart, deleteCart }
