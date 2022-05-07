@@ -26,6 +26,14 @@ app.use(express.urlencoded());
 // Serve CSS staticly 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Do everything with the only existing user
+app.use((req, res, next) => {
+    User.findByPk(1)
+        // @ts-ignore
+        .then(user => req.user = user)
+        .catch(err => console.log(err));
+});
+
 // use Routes
 app.use('/admin', adminRoutes.router);
 app.use(shopRoutes);
