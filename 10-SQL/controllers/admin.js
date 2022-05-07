@@ -7,8 +7,9 @@ const postProduct = (req, res) => {
         description: req.body.description,
         imageUrl: req.body.imageUrl,
         price: req.body.price
-    }).then(res => {
-    }).catch(err => console.log(err));
+    })
+        .then(result => res.redirect('/admin/products'))
+        .catch(err => console.log(err));
 }
 
 const getProduct = (req, res) => {
@@ -66,14 +67,18 @@ const postEditProduct = ((req, res) => {
         });
 
         return prod.save();
-
-    }).catch(err => console.log(err));
-    res.redirect('/admin/products');
+    })
+        .then(result => res.redirect('/admin/products'))
+        .catch(err => console.log(err));
 });
 
 const deleteProduct = (req, res) => {
-    Product.delete(req.body.prodId);
-    res.redirect('/admin/products');
+    Product.findByPk(req.body.prodId)
+        .then(prod => {
+            return prod.destroy()
+        })
+        .then(result => res.redirect('/admin/products'))
+        .catch(err => console.log(err));
 };
 
 module.exports = { getProduct, postProduct, getProducts, getEditProduct, postEditProduct, deleteProduct }
