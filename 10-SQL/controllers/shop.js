@@ -87,8 +87,18 @@ const postCart = (req, res) => {
 };
 
 const deleteCart = (req, res) => {
-    Cart.removeProduct(req.body.prodId, req.body.prodPrice);
-    res.redirect('/cart');
+    req.user.getCart()
+        .then(cart => {
+            return cart.getProducts({ where: { id: req.body.prodId } })
+        })
+        .then(prods => {
+            const prod = prods[0]
+            return prod['cart-item'].destroy();
+        })
+        .then(_ => {
+            res.redirect('/cart');
+        })
+        .catch(err => console.log(err));
 };
 
 const getCheckout = (req, res) => {
