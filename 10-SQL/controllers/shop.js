@@ -11,7 +11,7 @@ const getIndex = (req, res) => {
         });
     }).catch(err => console.log(err));
 
-    // Classical mysql2 using [rows, fieldData]
+    // Classical mysql2 using [rows, fieldData] -> Rows are the actual items from table
     // Product.fetchAll().then(([rows, fieldData]) => {
     // ...
     // }).catch(e => console.log(e));
