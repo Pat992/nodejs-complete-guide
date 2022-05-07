@@ -1,27 +1,12 @@
 // @ts-check
-const { Sequelize } = require('sequelize');
+const mongoDb = require('mongodb');
 
-const sequelize = new Sequelize('product-db', 'root', '', {
-    dialect: 'mysql',
-    host: 'localhost'
-});
+const MongoClient = mongoDb.MongoClient;
 
-module.exports = sequelize;
+const mongoConnect = (callback) => {
+    MongoClient.connect('mongodb://phettich:Password1234@127.0.0.1:27017')
+        .then(client => callback(client))
+        .catch(e => console.log(e));
+};
 
-
-
-
-
-
-
-// -------------- Classical approach without Sequelize -------------- //
-// const mysql = require('mysql2');
-
-// const pool = mysql.createPool({
-//     host: 'localhost',
-//     user: 'root',
-//     database: 'product-db',
-//     password: ''
-// });
-
-// module.exports = pool.promise();
+module.exports = mongoConnect;
