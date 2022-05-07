@@ -77,11 +77,14 @@ sequelize.sync({ force: false })
                     return User.create({
                         name: 'Dummy',
                         email: 'dummy@test.com'
+                    }).then(user => {
+                        // @ts-ignore
+                        return user.createCart();
                     })
                 }
                 return Promise.resolve(user);
             })
-            .then(result => {
+            .then(user => {
                 // Start the server
                 app.listen(port, () => {
                     console.log(`Server started on port port`);
