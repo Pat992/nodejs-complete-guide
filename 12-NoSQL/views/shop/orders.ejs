@@ -1,0 +1,28 @@
+<%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+    </head>
+
+    <body>
+        <%- include('../partials/navigation.ejs') %>
+            <main>
+                <% if(orders.length <=0) { %>
+                    <h1>No orders placed yet</h1>
+                    <% } else { %>
+                        <ul>
+                            <% orders.forEach(order=> { %>
+                                <li>
+                                    <h1># <%= order.id %>
+                                    </h1>
+                                    <ul>
+                                        <% order.products.forEach(prod=> { %>
+                                            <li>
+                                                <%= prod.title %> (<%= prod.order_item.quantity %>)
+                                            </li>
+                                            <% }); %>
+                                    </ul>
+                                </li>
+                                <% }); %>
+                        </ul>
+                        <% } %>
+            </main>
+            <%- include('../partials/end.ejs') %>
