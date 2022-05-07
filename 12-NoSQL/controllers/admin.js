@@ -48,7 +48,7 @@ const getEditProduct = (req, res) => {
 
 const getProducts = (req, res) => {
 
-    Product.findAll().then(prods => {
+    Product.fetchAll().then(prods => {
         res.render('admin/products.ejs', {
             prods: prods,
             pageTitle: 'Products',

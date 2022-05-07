@@ -4,7 +4,7 @@ const path = require('path');
 // const expressHbs = require('express-handlebars');
 // Get routes
 const adminRoutes = require('./routes/admin');
-// const shopRoutes = require('./routes/shop');
+const shopRoutes = require('./routes/shop');
 const { get404 } = require('./controllers/404');
 const { mongoConnect } = require('./util/database');
 
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // use Routes
 app.use('/admin', adminRoutes.router);
-// app.use(shopRoutes);
+app.use(shopRoutes);
 
 // 404 router
 app.use(get404);

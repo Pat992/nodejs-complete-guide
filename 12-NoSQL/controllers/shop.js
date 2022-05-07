@@ -2,22 +2,17 @@
 const Product = require('../models/product');
 
 const getIndex = (req, res) => {
-    Product.findAll().then(prods => {
+    Product.fetchAll().then(prods => {
         res.render('shop/index.ejs', {
             prods: prods,
             pageTitle: 'Shop',
             path: '/',
         });
     }).catch(err => console.log(err));
-
-    // Classical mysql2 using [rows, fieldData] -> Rows are the actual items from table
-    // Product.fetchAll().then(([rows, fieldData]) => {
-    // ...
-    // }).catch(e => console.log(e));
 }
 
 const getProducts = (req, res) => {
-    Product.findAll().then(prods => {
+    Product.fetchAll().then(prods => {
         res.render('shop/index.ejs', {
             prods: prods,
             pageTitle: 'Shop',

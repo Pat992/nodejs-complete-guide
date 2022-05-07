@@ -1,3 +1,5 @@
+const { Db } = require('mongodb');
+
 // @ts-check
 const getDb = require('../util/database').getDb;
 
@@ -13,6 +15,14 @@ class Product {
         return db.collection('products')
             .insertOne(this)
             .then(res => console.log(res))
+            .catch(e => console.log(e));
+    };
+    static fetchAll() {
+        const db = getDb();
+        return db.collection('products')
+            .find()
+            .toArray()
+            .then(products => products)
             .catch(e => console.log(e));
     };
 };
