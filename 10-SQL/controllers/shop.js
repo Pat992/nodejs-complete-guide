@@ -84,6 +84,9 @@ const getProductDetails = (req, res) => {
             product: prod
         });
     }).catch(err => console.log(err));
+
+    // ALTERNATIVE APPROACH -> Returns an array
+    // Product.findAll({ where: { id: prodId } }).then(products => { ...products[0] })
 };
 
 module.exports = { getProducts, getCart, getCheckout, getIndex, getOrders, getProductDetails, postCart, deleteCart }
