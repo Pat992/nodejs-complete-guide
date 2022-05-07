@@ -29,8 +29,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Do everything with the only existing user
 app.use((req, res, next) => {
     User.findByPk(1)
-        // @ts-ignore
-        .then(user => req.user = user)
+        .then(user => {
+            // @ts-ignore
+            req.user = user;
+            next();
+        })
         .catch(err => console.log(err));
 });
 

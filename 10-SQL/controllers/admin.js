@@ -2,14 +2,25 @@
 const Product = require('../models/product');
 
 const postProduct = (req, res) => {
-    Product.create({
+    req.user.createProduct({
         title: req.body.title,
         description: req.body.description,
         imageUrl: req.body.imageUrl,
-        price: req.body.price
+        price: req.body.price,
     })
         .then(result => res.redirect('/admin/products'))
         .catch(err => console.log(err));
+
+    // userId can also be set explicit, but nice with the aboove user.create....()
+    // Product.create({
+    //     title: req.body.title,
+    //     description: req.body.description,
+    //     imageUrl: req.body.imageUrl,
+    //     price: req.body.price,
+    //     userId: req.user.id
+    // })
+    //     .then(result => res.redirect('/admin/products'))
+    //     .catch(err => console.log(err));
 }
 
 const getProduct = (req, res) => {
@@ -63,7 +74,8 @@ const postEditProduct = ((req, res) => {
             title: req.body.title,
             description: req.body.description,
             imageUrl: req.body.imageUrl,
-            price: req.body.price
+            price: req.body.price,
+            userId: req.user.id
         });
 
         return prod.save();
