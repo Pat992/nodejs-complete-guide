@@ -2,16 +2,13 @@
 const Product = require('../models/product');
 
 const postProduct = (req, res) => {
-    const product = new Product(
-        null,
-        req.body.title,
-        req.body.imageUrl,
-        req.body.description,
-        req.body.price
-    );
-    product.save().then(([row, fieldData]) => {
-        res.redirect('/');
-    }).catch(e => console.log(e));
+    Product.create({
+        title: req.body.title,
+        description: req.body.description,
+        imageUrl: req.body.imageUrl,
+        price: req.body.price
+    }).then(res => {
+    }).catch(err => console.log(err));
 }
 
 const getProduct = (req, res) => {

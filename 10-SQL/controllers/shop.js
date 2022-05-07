@@ -3,23 +3,28 @@ const Product = require('../models/product');
 const Cart = require('../models/cart');
 
 const getIndex = (req, res) => {
-    Product.fetchAll().then(([rows, fieldData]) => {
+    Product.findAll().then(prods => {
         res.render('shop/index.ejs', {
-            prods: rows,
+            prods: prods,
             pageTitle: 'Shop',
             path: '/',
         });
-    }).catch(e => console.log(e));
+    }).catch(err => console.log(err));
+
+    // Classical mysql2 using [rows, fieldData]
+    // Product.fetchAll().then(([rows, fieldData]) => {
+    // ...
+    // }).catch(e => console.log(e));
 }
 
 const getProducts = (req, res) => {
-    Product.fetchAll().then(([rows, fieldData]) => {
-        res.render('shop/product-list.ejs', {
-            prods: rows,
-            pageTitle: 'Products',
+    Product.findAll().then(prods => {
+        res.render('shop/index.ejs', {
+            prods: prods,
+            pageTitle: 'Shop',
             path: '/products',
         });
-    }).catch(e => console.log(e));
+    }).catch(err => console.log(err));
 }
 
 const getCart = (req, res) => {
