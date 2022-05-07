@@ -32,6 +32,7 @@ const getCart = (req, res) => {
         .then(cart => {
             return cart.getProducts()
                 .then(prods => {
+                    console.log(prods);
                     res.render('shop/cart.ejs', {
                         pageTitle: 'Cart',
                         path: '/cart',
@@ -61,7 +62,14 @@ const postCart = (req, res) => {
             let newQuantity = 1;
 
             if (product) {
+                const oldQuantity = product['cart-item'].quantity;
+                newQuantity += oldQuantity;
 
+                return fetchedCart.addProduct(product, {
+                    through: {
+                        quantity: newQuantity
+                    }
+                });
             }
             return Product.findByPk(prodId)
                 .then(product => {
