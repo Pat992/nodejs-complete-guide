@@ -107,11 +107,16 @@ const getCheckout = (req, res) => {
     });
 }
 
-const getOrders = (req, res) => {
-    res.render('shop/orders.ejs', {
-        pageTitle: 'Your Orders',
-        path: '/orders',
-    });
+const getOrders = (req, res, next) => {
+    req.user.getOrders({ include: ['products'] })
+        .then(orders => {
+            res.render('shop/orders.ejs', {
+                pageTitle: 'Your Orders',
+                path: '/orders',
+                orders: orders
+            });
+        })
+        .catch(err => console.log(err));
 };
 
 const getProductDetails = (req, res) => {
@@ -131,14 +136,21 @@ const getProductDetails = (req, res) => {
 };
 
 const postOrder = (req, res, next) => {
+    let fetchedCart;
     req.user.getCart()
-        .then(cart => cart.getProducts())
+        .then(cart => {
+            fetchedCart = cart;
+            return cart.getProducts()
+        })
         .then(prods => {
             req.user.createOrder()
                 .then(order => order.addProducts(prods.map(prod => {
                     prod.order_item = { quantity: prod['cart-item'].quantity }
                     return prod;
                 })))
+                .then(_ => {
+                    return fetchedCart.setProducts(null);
+                })
                 .then(_ => res.redirect('/orders'))
                 .catch(err => console.log(err))
         })
