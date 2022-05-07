@@ -6,6 +6,7 @@ const path = require('path');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const { get404 } = require('./controllers/404');
+const sequelize = require('./util/database');
 
 const app = express();
 
@@ -30,6 +31,13 @@ app.use(shopRoutes);
 // 404 router
 app.use(get404);
 
-app.listen(port, () => {
-    console.log(`Server started on port port`);
+// Add tables to DB automatically
+sequelize.sync().then(res => {
+    console.log(res);
+    // Start the server
+    app.listen(port, () => {
+        console.log(`Server started on port port`);
+    });
+}).catch(err => {
+    console.log(err);
 });

@@ -1,3 +1,20 @@
+// @ts-check
+const { Sequelize } = require('sequelize');
+
+const sequelize = new Sequelize('product-db', 'root', '', {
+    dialect: 'mysql',
+    host: 'localhost'
+});
+
+module.exports = sequelize;
+
+
+
+
+
+
+
+// -------------- Classical approach without Sequelize -------------- //
 // const mysql = require('mysql2');
 
 // const pool = mysql.createPool({
@@ -8,12 +25,3 @@
 // });
 
 // module.exports = pool.promise();
-// @ts-check
-const { Sequelize } = require('sequelize');
-
-const sequelize = new Sequelize('product_db', 'root', '', {
-    dialect: 'mysql',
-    host: 'localhost'
-});
-
-module.exports = sequelize;
